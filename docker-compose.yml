@@ -1,0 +1,30 @@
+services:
+  postgres_db:
+    container_name: postgres
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: viepovsky
+      POSTGRES_PASSWORD: viepovsky
+      POSTGRES_DB: viepovsky
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    ports:
+      - 8888:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: viepovsky@viepovsky.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    restart: unless-stopped
+
+volumes:
+  postgres:
+  pgadmin:
